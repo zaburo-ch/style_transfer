@@ -5,20 +5,19 @@ from scipy.misc import imread, imsave
 from my_style_transfer import style_transfer
 
 
-"""
-parser = argparse.ArgumentParser(description='Luminance-only transfer with Keras.')
-parser.add_argument('content_image_path', metavar='content', type=str,
+parser = argparse.ArgumentParser(description='Luminance-only transfer with TensorFlow.')
+parser.add_argument('content_image_path', type=str,
                     help='Path to the content image.')
-parser.add_argument('style_image_path', metavar='style', type=str,
+parser.add_argument('style_image_path', type=str,
                     help='Path to the style image.')
-parser.add_argument('result_prefix', metavar='res_prefix', type=str,
-                    default=None, help='Prefix for the saved results.')
-parser.add_argument('content_weight', metavar='w_content', type=float,
-                    default=0.025, help='Content weight of loss function.')
-parser.add_argument('style_weight', metavar='w_style', type=float,
-                    default=1., help='Style weight of loss function.')
-parser.add_argument('total_variation_weight', metavar='w_total', type=float,
-                    default=1., help='Total variation weight of loss function.')
+parser.add_argument('--result_prefix', type=str, default='result/',
+                    help='Prefix for the saved results. (default: %(default)s)')
+parser.add_argument('--content_weight', type=float, default=1e0,
+                    help='Content weight in the loss function. (default: %(default)s)')
+parser.add_argument('--style_weight', type=float, default=1e-1,
+                    help='Style weight in the loss function. (default: %(default)s)')
+parser.add_argument('--init_image_type', type=str, default='content',
+                    help='Type of the initialization. (default: %(default)s)')
 
 args = parser.parse_args()
 content_image_path = args.content_image_path
@@ -26,15 +25,8 @@ style_image_path = args.style_image_path
 result_prefix = args.result_prefix
 content_weight = args.content_weight
 style_weight = args.style_weight
-total_variation_weight = args.total_variation_weight
-"""
+init_image_type = args.init_image_type
 
-content_image_path = "../content_input/512_DSC_0489.jpg"
-style_image_path = "../style_input/starry-night.jpg"
-result_prefix = "result/gogh-0489_init-content_avg/"
-content_weight = 1e0
-style_weight = 1e-1
-init_image_type = 'content'
 
 # util functions
 
@@ -96,7 +88,7 @@ result_raw = style_transfer(content_image,
                             style_image,
                             content_weight=content_weight,
                             style_weight=style_weight,
-                            init_image_type='content')
+                            init_image_type=init_image_type)
 result_yiq = rgb_to_yiq(result_raw)
 result_image = np.concatenate((result_yiq[:, :, 0:1], content_iq), axis=2)
 result_image = yiq_to_rgb(result_image)

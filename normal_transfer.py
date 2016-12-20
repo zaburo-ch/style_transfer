@@ -2,23 +2,35 @@ from scipy.misc import imread, imsave
 import argparse
 from my_style_transfer import style_transfer
 
-"""
-parser = argparse.ArgumentParser(description='Luminance-only transfer with Keras.')
-parser.add_argument('content_image_path', metavar='content', type=str,
-                    help='Path to the content image.')
-parser.add_argument('style_image_path', metavar='style', type=str,
-                    help='Path to the style image.')
-parser.add_argument('result_prefix', metavar='res_prefix', type=str,
-                    default=None, help='Prefix for the saved results.')
-parser.add_argument('content_weight', metavar='w_content', type=float,
-                    default=0.025, help='Content weight of loss function.')
-parser.add_argument('style_weight', metavar='w_style', type=float,
-                    default=1., help='Style weight of loss function.')
-parser.add_argument('total_variation_weight', metavar='w_total', type=float,
-                    default=1., help='Total variation weight of loss function.')
-"""
 
-content_image = imread('../content_input/girl.jpg')
-style_image = imread('../style_input/kizan-daruma_cropped.jpg')
+parser = argparse.ArgumentParser(description='Style Transfer with TensorFlow.')
+parser.add_argument('content_image_path', type=str,
+                    help='Path to the content image.')
+parser.add_argument('style_image_path', type=str,
+                    help='Path to the style image.')
+parser.add_argument('--result_prefix', type=str, default='result/',
+                    help='Prefix for the saved results. (default: %(default)s)')
+parser.add_argument('--content_weight', type=float, default=1e0,
+                    help='Content weight in the loss function. (default: %(default)s)')
+parser.add_argument('--style_weight', type=float, default=1e-1,
+                    help='Style weight in the loss function. (default: %(default)s)')
+parser.add_argument('--init_image_type', type=str, default='content',
+                    help='Type of the initialization. (default: %(default)s)')
+
+args = parser.parse_args()
+content_image_path = args.content_image_path
+style_image_path = args.style_image_path
+result_prefix = args.result_prefix
+content_weight = args.content_weight
+style_weight = args.style_weight
+init_image_type = args.init_image_type
+
+content_image = imread(content_image_path)
+style_image = imread(style_image_path)
+result_image = style_transfer(content_image,
+                              style_image,
+                              content_weight=content_weight,
+                              style_weight=style_weight,
+                              init_image_type=init_image_type)
 result_image = style_transfer(content_image, style_image)
-imsave("daruma-girl.png", result_image)
+imsave(result_prefix + "result_image.png", result_image)
