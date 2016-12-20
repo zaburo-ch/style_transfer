@@ -15,11 +15,23 @@ TensorFlow implementation of Style Transfer
 Examples
 ---
 
-|content_image|style_image|
-|--|--|
-|<img src="examples/content_image.jpg" width="300">|<img src="examples/style_image.jpg" width="300">|
-|basic|luminance-only|
-|<img src="examples/basic_transfer.png" width="300">|<img src="examples/luminance_only.png" width="300">|
+<table align='center'>
+<tr>
+<td>content image</td>
+<td>style image</td>
+</tr>
+<tr>
+<td><img src="examples/content_image.jpg" width="300"></td>
+<td><img src="examples/style_image.jpg" width="300"></td>
+</tr>
+<td>basic</td>
+<td>luminance-only</td>
+</tr>
+<tr>
+<td><img src="examples/basic_transfer.png" width="300"></td>
+<td><img src="examples/luminance_only.png" width="300"></td>
+</tr>
+</table>
 
 Acknowledgements
 ---
