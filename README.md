@@ -14,6 +14,7 @@ TensorFlow implementation of Style Transfer
 
 Examples
 ---
+
 |content_image|style_image|
 |--|--|
 |<img src="examples/content_image.jpg" width="300">|<img src="examples/style_image.jpg" width="300">|
