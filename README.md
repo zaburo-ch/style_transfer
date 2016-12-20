@@ -10,7 +10,7 @@ TensorFlow implementation of Style Transfer
  - fast_transfer/  
    An implementation of the Image Transformation Networks described in  
    [Perceptual Losses for Real-Time Style Transfer and Super-Resolution](https://arxiv.org/abs/1603.08155).  
-   **These codes has still room for improvement**.
+   These codes has still room for improvement.
 
 Examples
 ---
